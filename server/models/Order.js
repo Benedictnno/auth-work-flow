@@ -33,12 +33,12 @@ const OrderSchema = mongoose.Schema(
     orderItems: [SingleOrderItemSchema],
     status: {
       type: String,
-      enum: ['pending', 'failed', 'paid', 'delivered', 'canceled'],
-      default: 'pending',
+      enum: ["pending", "failed", "paid", "delivered", "canceled"],
+      default: "pending",
     },
     user: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     clientSecret: {
