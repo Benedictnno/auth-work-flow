@@ -13,7 +13,7 @@ const sendEmail = async ({ to, subject, html }) => {
       from: "Excited User <benedctnnaoma0@gmail.com>",
       to,
       subject,
-      text,
+      // text,
       html,
     })
     .then((msg) => console.log(msg)) // logs response data

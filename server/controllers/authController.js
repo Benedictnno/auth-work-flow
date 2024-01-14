@@ -26,11 +26,12 @@ const register = async (req, res) => {
   });
   // const tokenUser = createTokenUser(user);
   // attachCookiesToResponse({ res, user: tokenUser });
+  console.log(user);
   await sendVerification({
-    email,
-    name,
-    verificationToken,
-    origin: "http://localhost:3000/register",
+    email: user.email,
+    name: user.name,
+    verificationToken: user.verificationToken,
+    origin: "http://localhost:3000",
   });
   res
     .status(StatusCodes.CREATED)
