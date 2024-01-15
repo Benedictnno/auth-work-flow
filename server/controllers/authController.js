@@ -91,13 +91,23 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: tokenUser });
 };
 
+
 const logout = async (req, res) => {
-  res.cookie("token", "logout", {
+
+  await Token.findOneAndDelete({user:req.user.userId})
+  res.cookie("accessToken", "logout", {
+ 
     httpOnly: true,
-    expires: new Date(Date.now() + 1000),
+    expires: new Date(Date.now()),
+  });
+  res.cookie("refreshToken", "logout", {
+ 
+    httpOnly: true,
+    expires: new Date(Date.now()),
   });
   res.status(StatusCodes.OK).json({ msg: "user logged out!" });
 };
+
 const verifyEmail = async (req, res) => {
   const { verificationToken, email } = req.body;
   const user = await User.findOne({ email });
@@ -110,10 +120,18 @@ const verifyEmail = async (req, res) => {
   await user.save();
   res.status(StatusCodes.OK).json({ msg: "email verified" });
 };
+const forgotPassword = async(req,res)=>{
+ res.send("forgotPassword");
+}
+const resetPassword = async(req,res)=>{
+ res.send("resetPassword");
+
+}
 
 module.exports = {
   register,
   login,
   logout,
   verifyEmail,
+  forgotPassword,resetPassword
 };
